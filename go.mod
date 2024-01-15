@@ -1,1 +1,1 @@
-module monkeyInterpreter
+module strawberryInterpreter
