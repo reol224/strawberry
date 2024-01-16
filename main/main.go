@@ -13,7 +13,7 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Hello %s! This is the Strawberry programming language!\n",
-		user.Username)
+		user.Name)
 	fmt.Printf("Functionality is reduced for now but stay tuned for future updates!\n")
 	repl.Start(os.Stdin, os.Stdout)
 
