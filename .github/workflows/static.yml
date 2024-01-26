@@ -34,7 +34,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Copy /themes folder
-        run: cp -r themes public/themes
+        run: |
+          mkdir -p public/themes
+          cp -r themes/* public/themes/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -42,3 +44,4 @@ jobs:
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
+        uses: actions/deploy-pages@v4
