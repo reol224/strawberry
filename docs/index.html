@@ -1,0 +1,17 @@
+---
+layout: default
+title: Strawberry docs
+---
+
+<p>Notes for the small Go interpreter behind the Strawberry playground.</p>
+
+<h2>Start here</h2>
+<ul>
+  <li><a href="{{ '/development/' | relative_url }}">Build and run Strawberry</a></li>
+  <li><a href="{{ '/language/' | relative_url }}">Language notes and current limitations</a></li>
+</ul>
+
+<h2>What works today?</h2>
+<p>The evaluator currently runs integer arithmetic, comparisons, booleans, and prefix operators. The parser recognizes more syntax than the evaluator can execute; the language page separates those stages.</p>
+
+<p><a href="{{ site.playground_url | default: '/' }}">Open the playground →</a></p>

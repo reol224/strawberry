@@ -1,0 +1,7 @@
+title: Strawberry Documentation
+description: Notes and language reference for the Strawberry interpreter.
+baseurl: /docs
+url: ""
+permalink: /:basename/
+destination: ../site/docs
+markdown: kramdown

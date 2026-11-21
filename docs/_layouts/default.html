@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }} — {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/docs.css' | relative_url }}">
+</head>
+<body>
+  <header>
+    <a class="brand" href="{{ site.playground_url | default: '/' }}">strawberry</a>
+    <nav>
+      <a href="{{ '/' | relative_url }}">Docs home</a>
+      <a href="{{ '/language/' | relative_url }}">Language</a>
+      <a href="{{ '/development/' | relative_url }}">Development</a>
+    </nav>
+  </header>
+  <main>
+    <h1>{{ page.title }}</h1>
+    {{ content }}
+  </main>
+  <footer>Strawberry is experimental. The language and these docs are a work in progress.</footer>
+</body>
+</html>
