@@ -40,3 +40,7 @@ Open <http://localhost:8000>. You’ll need Go 1.22 or newer with its WebAssembl
 To build only the WebAssembly interpreter, run `./scripts/build-wasm.sh`. The shared API used by both the command-line REPL and playground is in [`interpreter/`](interpreter/).
 
 For the language’s current capabilities and limitations, see the [language notes](docs/language.md).
+
+## Deploy on Vercel
+
+Import the repository with its root directory as the project root and use the **Other** framework preset. [`vercel.json`](vercel.json) installs Jekyll, downloads a checksum-verified Go toolchain for the build, and publishes `site/`. Push changes to your deployment branch to trigger a new build.

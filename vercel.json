@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "gem install jekyll --no-document",
-  "buildCommand": "./scripts/build-site.sh",
+  "buildCommand": "sh ./scripts/build-vercel.sh",
   "outputDirectory": "site"
 }
