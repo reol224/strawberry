@@ -18,15 +18,25 @@ go test ./...
 
 The evaluator currently supports integer arithmetic, comparisons, booleans, and prefix operators. See the [language notes](docs/language.md) for what is and is not implemented yet.
 
-## Website and playground
+## Browser playground and docs
 
-The static playground compiles Strawberry to WebAssembly and runs programs locally in your browser. Build it together with the separate Jekyll documentation site:
+The browser playground has a REPL-style workspace: choose an example, edit a program, and run it beside its output. Strawberry is compiled to WebAssembly, so code runs locally in your browser and is not sent to a server.
+
+The documentation is a separate Jekyll site. Install Jekyll if needed:
+
+```sh
+gem install jekyll
+```
+
+Build both the playground and documentation, then serve the generated site:
 
 ```sh
 ./scripts/build-site.sh
 python3 -m http.server 8000 --directory site
 ```
 
-Open <http://localhost:8000>. Requirements: Go 1.22 or newer with its WebAssembly runtime files, Jekyll, and Python 3 (or another static HTTP server).
+Open <http://localhost:8000>. You’ll need Go 1.22 or newer with its WebAssembly runtime files, Jekyll, and Python 3 (or another static HTTP server).
 
-Build only the WebAssembly interpreter with `./scripts/build-wasm.sh`. The shared API used by both the REPL and playground is in [`interpreter/`](interpreter/).
+To build only the WebAssembly interpreter, run `./scripts/build-wasm.sh`. The shared API used by both the command-line REPL and playground is in [`interpreter/`](interpreter/).
+
+For the language’s current capabilities and limitations, see the [language notes](docs/language.md).

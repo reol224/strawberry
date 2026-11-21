@@ -3,51 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#141015">
-  <title>Strawberry — tiny language, big ideas</title>
+  <meta name="theme-color" content="#25262d">
+  <title>Strawberry Playground</title>
   <link rel="stylesheet" href="style.css">
   <script src="wasm_exec.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="./"><span aria-hidden="true">✿</span> strawberry</a>
+    <a class="brand" href="./"><span class="brand-mark" aria-hidden="true">✿</span><span>strawberry</span></a>
+    <span class="topbar-title">PLAYGROUND</span>
     <nav aria-label="Main navigation">
       <a href="docs/">Docs</a>
-      <a href="https://github.com/reol224/strawberry">Source</a>
+      <a href="https://github.com/reol224/strawberry">Source ↗</a>
     </nav>
   </header>
 
-  <main>
-    <section class="intro">
-      <p class="eyebrow">A tiny language, growing in public</p>
-      <h1>Try <span>Strawberry</span>.</h1>
-      <p class="lede">A little interpreter written in Go. Type an expression, run it, and see what happens.</p>
-    </section>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Playground options">
+      <section class="sidebar-section">
+        <h2 class="sidebar-heading">Examples</h2>
+        <button class="example active" type="button" data-code="2 * (3 + 4)" aria-pressed="true" disabled>Arithmetic</button>
+        <button class="example" type="button" data-code="3 < 8" aria-pressed="false" disabled>Comparison</button>
+        <button class="example" type="button" data-code="!false" aria-pressed="false" disabled>Boolean</button>
+        <button class="example" type="button" data-code="-12" aria-pressed="false" disabled>Prefix operator</button>
+      </section>
 
-    <section class="playground" aria-labelledby="playground-title">
-      <div class="panel-heading">
-        <h2 id="playground-title">Playground</h2>
-        <span id="runtime-status" class="status" role="status">Starting WebAssembly…</span>
-      </div>
-      <label for="source">Your program</label>
-      <textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off">2 * (3 + 4)</textarea>
-      <div class="controls">
-        <button id="run" type="button" disabled>▶ Run</button>
-        <span class="hint">Ctrl / ⌘ + Enter</span>
-      </div>
-      <div class="output-wrap">
-        <div class="output-label">Output</div>
+      <section class="sidebar-section settings">
+        <h2 class="sidebar-heading">Settings</h2>
+        <label class="setting-row" for="wrap-lines">
+          <input id="wrap-lines" type="checkbox" checked>
+          <span>Line wrap</span>
+        </label>
+      </section>
+
+      <section class="sidebar-section language-info">
+        <h2 class="sidebar-heading">Strawberry</h2>
+        <p>A small interpreter written in Go. The language is still growing.</p>
+        <a href="docs/">Read the language notes ↗</a>
+      </section>
+    </aside>
+
+    <main class="workspace" aria-label="Strawberry code playground">
+      <h1 class="sr-only">Strawberry Playground</h1>
+      <section class="editor-pane" aria-labelledby="program-title">
+        <div class="pane-toolbar">
+          <h2 id="program-title" class="pane-tab active">Program</h2>
+          <span class="filename">example.strb</span>
+        </div>
+        <div class="editor-body">
+          <pre id="line-numbers" class="line-numbers" aria-hidden="true">1</pre>
+          <textarea id="source" aria-label="Program editor" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="soft">2 * (3 + 4)</textarea>
+        </div>
+        <div class="pane-footer">
+          <button id="run" type="button" disabled>▶ Run</button>
+          <span class="hint">Ctrl / ⌘ + Enter</span>
+        </div>
+      </section>
+
+      <section class="output-pane" aria-labelledby="output-title">
+        <div class="pane-toolbar">
+          <h2 id="output-title" class="pane-tab active">Output</h2>
+          <span id="runtime-status" class="status" role="status">Starting WebAssembly…</span>
+        </div>
         <pre id="output" aria-live="polite">Waiting for the interpreter…</pre>
-      </div>
-    </section>
-
-    <p class="footnote">Experimental and evolving. Your program runs locally in this page; it is not sent to a server.</p>
-  </main>
-
-  <footer>
-    <span>Made of Go, curiosity, and berries.</span>
-    <a href="docs/">Read the docs →</a>
-  </footer>
+      </section>
+    </main>
+  </div>
 </body>
 </html>

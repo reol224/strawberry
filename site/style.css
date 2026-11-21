@@ -1,98 +1,209 @@
 :root {
   color-scheme: dark;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  background: #141015;
-  color: #f6edf2;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #191a20;
+  color: #e4e5e9;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --pink: #ff6b9d;
-  --muted: #b7a8b1;
-  --panel: #211a22;
-  --line: #453443;
+  --page: #191a20;
+  --bar: #25262d;
+  --panel: #1d1e24;
+  --panel-raised: #292a32;
+  --border: #343640;
+  --muted: #9a9ca8;
+  --berry: #e66c91;
+  --gold: #f0d260;
 }
 
 * { box-sizing: border-box; }
 
 body {
+  width: 100%;
+  height: 100vh;
   min-width: 320px;
   margin: 0;
-  background:
-    radial-gradient(ellipse at 50% 0, rgb(111 38 78 / 22%), transparent 58%),
-    #141015;
+  overflow: hidden;
+  background: var(--page);
 }
 
-a { color: var(--pink); }
+button, textarea { font: inherit; }
+a { color: inherit; }
 
-.topbar, footer {
+.topbar {
+  display: flex;
+  align-items: center;
+  height: 54px;
+  padding: 0 1.1rem;
+  border-bottom: 1px solid #383941;
+  background: var(--bar);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  color: #f2f1e9;
+  font-size: .96rem;
+  font-weight: 720;
+  letter-spacing: -.035em;
+  text-decoration: none;
+}
+
+.brand-mark { color: var(--berry); font-size: 1.05rem; }
+.topbar-title { margin-left: 1.5rem; color: #858794; font-size: .65rem; letter-spacing: .12em; }
+.topbar nav { display: flex; gap: 1.25rem; margin-left: auto; }
+.topbar nav a { color: #c5c6cc; font-size: .78rem; text-decoration: none; }
+.topbar nav a:hover, .language-info a:hover { color: var(--gold); }
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 238px minmax(0, 1fr);
+  height: calc(100vh - 54px);
+  min-height: 0;
+}
+
+.sidebar {
+  overflow: auto;
+  border-right: 1px solid var(--border);
+  background: #22232a;
+}
+
+.sidebar-section { padding: 1.15rem 1rem; border-bottom: 1px solid var(--border); }
+.sidebar-heading { margin: 0 0 .8rem; color: #9294a0; font-size: .67rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.example {
+  display: block;
+  width: 100%;
+  padding: .5rem .65rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #b8bac5;
+  text-align: left;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.example:hover:not(:disabled) { background: #2e3038; color: #f0f0f2; }
+.example.active { background: #34353e; color: var(--gold); }
+.example:disabled { cursor: wait; opacity: .55; }
+
+.setting-row { display: flex; align-items: center; gap: .55rem; color: #b8bac5; font-size: .78rem; }
+.setting-row input { accent-color: var(--berry); }
+.language-info p { margin: 0 0 .7rem; color: #9294a0; font-size: .78rem; line-height: 1.55; }
+.language-info a { color: #c9cbd3; font-size: .76rem; text-decoration: none; }
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+}
+
+.editor-pane, .output-pane { display: flex; min-width: 0; min-height: 0; flex-direction: column; }
+.editor-pane { border-right: 1px solid var(--border); }
+.pane-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  max-width: 1000px;
-  margin: auto;
-  padding: 1.4rem 1.5rem;
+  min-height: 39px;
+  padding: 0 .9rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel-raised);
 }
 
-.topbar { border-bottom: 1px solid var(--line); }
-.brand { color: #fff; font-weight: 700; text-decoration: none; }
-.brand span { color: var(--pink); }
-nav { display: flex; gap: 1.5rem; }
-nav a, footer a { text-decoration: none; }
-
-main { width: min(760px, calc(100% - 2rem)); margin: 5rem auto 3rem; }
-.intro { margin-bottom: 2rem; }
-.eyebrow, .output-label { color: var(--pink); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
-h1 { margin: .6rem 0; font-size: clamp(2.4rem, 8vw, 4.5rem); letter-spacing: -.08em; }
-h1 span { color: var(--pink); }
-.lede, .footnote { color: var(--muted); line-height: 1.7; }
-
-.playground {
-  padding: 1.25rem;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgb(33 26 34 / 92%);
-  box-shadow: 0 18px 70px rgb(0 0 0 / 28%);
+.pane-tab {
+  display: flex;
+  align-items: center;
+  height: 39px;
+  margin: 0;
+  color: #a9abb6;
+  font-size: .75rem;
+  font-weight: 400;
 }
 
-.panel-heading, .controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-h2 { margin: 0 0 1.2rem; font-size: 1rem; }
-.status, .hint { color: var(--muted); font-size: .78rem; }
-.status.error { color: #ff8a8a; }
-label { display: block; margin-bottom: .5rem; color: var(--muted); font-size: .85rem; }
+.pane-tab.active { border-bottom: 2px solid var(--gold); color: var(--gold); }
+.filename, .status { color: var(--muted); font-size: .7rem; }
+.status.error { color: #ff9a9a; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-textarea, pre {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: #100d12;
-  color: #f6edf2;
-  font: inherit;
+.editor-body {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  min-height: 0;
+  background: var(--panel);
 }
 
-textarea { min-height: 145px; padding: 1rem; line-height: 1.6; resize: vertical; }
-textarea:focus { outline: 2px solid var(--pink); outline-offset: 2px; }
-.controls { justify-content: flex-start; margin: .9rem 0 1.2rem; }
-button {
-  padding: .65rem 1rem;
+.line-numbers {
+  overflow: hidden;
+  margin: 0;
+  padding: .9rem .7rem .9rem 0;
   border: 0;
-  border-radius: 6px;
-  background: var(--pink);
-  color: #20121a;
-  font: inherit;
-  font-weight: 700;
+  background: #202127;
+  color: #686a76;
+  font: .84rem/1.65 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  text-align: right;
+  user-select: none;
+}
+
+textarea, #output {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: .9rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--panel);
+  color: #e5e5e9;
+  font: .84rem/1.65 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  tab-size: 4;
+}
+
+textarea { resize: none; }
+textarea:focus { outline: none; }
+.editor-body:focus-within { box-shadow: inset 0 0 0 1px #55576a; }
+#output { flex: 1; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+#output.error { color: #ffaaaa; }
+
+.pane-footer {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  min-height: 44px;
+  padding: .45rem .8rem;
+  border-top: 1px solid var(--border);
+  background: var(--bar);
+}
+
+#run {
+  padding: .4rem .7rem;
+  border: 1px solid #6f6331;
+  border-radius: 4px;
+  background: #4a442c;
+  color: #f2dc7b;
+  font-size: .75rem;
   cursor: pointer;
 }
-button:disabled { cursor: wait; opacity: .55; }
 
-.output-wrap { padding-top: 1rem; border-top: 1px solid var(--line); }
-.output-label { margin-bottom: .55rem; }
-pre { min-height: 3rem; margin: 0; padding: .8rem 1rem; white-space: pre-wrap; overflow-wrap: anywhere; }
-pre.error { color: #ff9a9a; }
-.footnote { margin-top: 1rem; font-size: .8rem; }
-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+#run:hover:not(:disabled) { background: #5b5231; }
+#run:disabled { cursor: wait; opacity: .55; }
+.hint { color: #82848f; font-size: .67rem; }
 
-@media (max-width: 560px) {
-  .topbar, footer { padding-right: 1rem; padding-left: 1rem; }
-  main { margin-top: 3.5rem; }
-  .playground { padding: 1rem; }
+@media (max-width: 760px) {
+  body { height: auto; min-height: 100vh; overflow: auto; }
+  .app-shell { display: flex; height: auto; min-height: calc(100vh - 54px); flex-direction: column; }
+  .sidebar { display: grid; grid-template-columns: 1fr 1fr; border-right: 0; border-bottom: 1px solid var(--border); }
+  .sidebar-section { padding: .8rem; }
+  .language-info { display: none; }
+  .workspace { grid-template-columns: 1fr; }
+  .editor-pane, .output-pane { min-height: 42vh; }
+  .editor-pane { border-right: 0; border-bottom: 1px solid var(--border); }
+}
+
+@media (max-width: 420px) {
+  .topbar { padding: 0 .75rem; }
+  .topbar-title { margin-left: .8rem; font-size: .58rem; }
+  .topbar nav { gap: .8rem; }
+  .topbar nav a { font-size: .72rem; }
 }
