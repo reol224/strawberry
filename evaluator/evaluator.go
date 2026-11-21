@@ -1,21 +1,18 @@
 package evaluator
 
 import (
-	"strawberryInterpreter/parser"
-	"strawberryInterpreter/lexer"
-	"strawberryInterpreter/object"
 	"strawberryInterpreter/ast"
-	"testing"
+	"strawberryInterpreter/object"
 )
 
 var (
 	NULL  = &object.Null{}
-	TRUE = &object.Boolean{Value: true}
+	TRUE  = &object.Boolean{Value: true}
 	FALSE = &object.Boolean{Value: false}
 )
 
 func Eval(node ast.Node) object.Object {
-	switch node := node.(type){
+	switch node := node.(type) {
 	case *ast.Program:
 		return evalStatements(node.Statements)
 
@@ -42,12 +39,10 @@ func Eval(node ast.Node) object.Object {
 }
 
 func evalBangOperatorExpression(right object.Object) object.Object {
-	switch right {
-	case TRUE:
-		return FALSE
-	case FALSE:
-		return TRUE
-	case NULL:
+	switch right := right.(type) {
+	case *object.Boolean:
+		return nativeBoolToBooleanObject(!right.Value)
+	case *object.Null:
 		return TRUE
 	default:
 		return FALSE
@@ -102,7 +97,7 @@ func evalMinusPrefixOperatorExpression(right object.Object) object.Object {
 	return &object.Integer{Value: -value}
 }
 
-func evalPrefixExpression(operator string, right object.Object) {
+func evalPrefixExpression(operator string, right object.Object) object.Object {
 	switch operator {
 	case "!":
 		return evalBangOperatorExpression(right)

@@ -43,7 +43,7 @@ func testEval(input string) object.Object {
 	return Eval(program)
 }
 
-func testIntegerObject(t *testing.T, obj object.Object, expected int64) {
+func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
 	result, ok := obj.(*object.Integer)
 	if !ok {
 		t.Errorf("object is not Integer. got=%T (%+v)", obj, obj)
@@ -59,7 +59,7 @@ func testIntegerObject(t *testing.T, obj object.Object, expected int64) {
 
 func TestEvalBooleanExpression(t *testing.T) {
 	tests := []struct {
-		input string
+		input    string
 		expected bool
 	}{
 		{"true", true},
@@ -97,18 +97,18 @@ func testBooleanObject(t *testing.T, obj object.Object, expected bool) bool {
 
 func TestBangOperator(t *testing.T) {
 	tests := []struct {
-	input string
-	expected bool
+		input    string
+		expected bool
 	}{
-	{"!true", false},
-	{"!false", true},
-	{"!5", false},
-	{"!!true", true},
-	{"!!false", false},
-	{"!!5", true},
+		{"!true", false},
+		{"!false", true},
+		{"!5", false},
+		{"!!true", true},
+		{"!!false", false},
+		{"!!5", true},
 	}
 	for _, tt := range tests {
-	evaluated := testEval(tt.input)
-	testBooleanObject(t, evaluated, tt.expected)
+		evaluated := testEval(tt.input)
+		testBooleanObject(t, evaluated, tt.expected)
 	}
 }
