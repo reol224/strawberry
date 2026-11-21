@@ -2,11 +2,10 @@ package repl
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io"
-	"strawberryInterpreter/lexer"
-	"strawberryInterpreter/parser"
-	"strawberryInterpreter/evaluator"
+	"strawberryInterpreter/interpreter"
 )
 
 const PROMPT = ">> "
@@ -56,19 +55,19 @@ func Start(in io.Reader, out io.Writer) {
 			return
 		}
 
-		line := scanner.Text()
-		l := lexer.New(line)
-		p := parser.New(l)
-
-		program := p.ParseProgram()
-		if len(p.Errors()) != 0 {
-			printParserErrors(out, p.Errors())
+		result, err := interpreter.Run(scanner.Text())
+		if err != nil {
+			var parseError *interpreter.ParseError
+			if errors.As(err, &parseError) {
+				printParserErrors(out, parseError.Messages)
+			} else {
+				fmt.Fprintf(out, "error: %v\n", err)
+			}
 			continue
 		}
 
-		evaluated := evaluator.Eval(program)
-		if evaluated != nil {
-			io.WriteString(out, evaluated.Inspect())
+		if result != "" {
+			io.WriteString(out, result)
 			io.WriteString(out, "\n")
 		}
 	}
@@ -81,4 +80,3 @@ func printParserErrors(out io.Writer, errors []string) {
 		io.WriteString(out, "\t"+msg+"\n")
 	}
 }
-

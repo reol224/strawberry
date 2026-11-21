@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141015">
+  <title>Strawberry — tiny language, big ideas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="wasm_exec.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./"><span aria-hidden="true">✿</span> strawberry</a>
+    <nav aria-label="Main navigation">
+      <a href="docs/">Docs</a>
+      <a href="https://github.com/reol224/strawberry">Source</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">A tiny language, growing in public</p>
+      <h1>Try <span>Strawberry</span>.</h1>
+      <p class="lede">A little interpreter written in Go. Type an expression, run it, and see what happens.</p>
+    </section>
+
+    <section class="playground" aria-labelledby="playground-title">
+      <div class="panel-heading">
+        <h2 id="playground-title">Playground</h2>
+        <span id="runtime-status" class="status" role="status">Starting WebAssembly…</span>
+      </div>
+      <label for="source">Your program</label>
+      <textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off">2 * (3 + 4)</textarea>
+      <div class="controls">
+        <button id="run" type="button" disabled>▶ Run</button>
+        <span class="hint">Ctrl / ⌘ + Enter</span>
+      </div>
+      <div class="output-wrap">
+        <div class="output-label">Output</div>
+        <pre id="output" aria-live="polite">Waiting for the interpreter…</pre>
+      </div>
+    </section>
+
+    <p class="footnote">Experimental and evolving. Your program runs locally in this page; it is not sent to a server.</p>
+  </main>
+
+  <footer>
+    <span>Made of Go, curiosity, and berries.</span>
+    <a href="docs/">Read the docs →</a>
+  </footer>
+</body>
+</html>
