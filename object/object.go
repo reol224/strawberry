@@ -1,8 +1,8 @@
 package object
 
-import {
+import (
 	"fmt"
-}
+)
 
 type ObjectType string
 
